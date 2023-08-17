@@ -15,3 +15,4 @@ MonoBehaviour:
   obstaclePrefab: {fileID: 4016603485930426308, guid: 86a385e9c66429c49b9b246367882129, type: 3}
   Name: Cactus
   damage: 1
+  stackAmount: 3

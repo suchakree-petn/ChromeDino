@@ -8,6 +8,7 @@ public class Obstacle : ScriptableObject
     public GameObject obstaclePrefab;
     public string Name;
     public float damage;
+    public int stackAmount;
 }
 
 

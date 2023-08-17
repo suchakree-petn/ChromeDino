@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99cc84d60f6124b4bbe753d91174cd9e, type: 3}
   m_Name: Bird
   m_EditorClassIdentifier: 
-  obstaclePrefab: {fileID: 0}
-  Name: 
-  damage: 0
+  obstaclePrefab: {fileID: 613483588098800709, guid: bc679aaaa94408e41b560db48b649362, type: 3}
+  Name: Bird
+  damage: 1
+  stackAmount: 1
