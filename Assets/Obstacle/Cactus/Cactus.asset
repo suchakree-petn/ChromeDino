@@ -16,3 +16,4 @@ MonoBehaviour:
   Name: Cactus
   damage: 1
   stackAmount: 3
+  groundOffset: {x: 0, y: 0}
