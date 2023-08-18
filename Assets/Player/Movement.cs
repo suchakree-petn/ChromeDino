@@ -30,7 +30,7 @@ public class Movement : MonoBehaviour
         if (currentPosition < startPosition)
         {
             rb.velocity = Vector2.zero;
-            rb.position = new Vector3(0, startPosition, 0);
+            rb.position = new Vector2(rb.position.x, startPosition);
             rb.constraints = RigidbodyConstraints2D.FreezePositionY;
             jump = false;
         }
