@@ -34,7 +34,7 @@ public class Movement : MonoBehaviour
             rb.constraints = RigidbodyConstraints2D.FreezePositionY;
             jump = false;
         }
-        if (Input.GetKeyDown(KeyCode.S) && jump == false)
+        if (Input.GetKey(KeyCode.S) && jump == false)
         {
             slide = true;
             _collider.offset = new Vector2(_collider.offset.x, _collider.offset.y - changecol);
