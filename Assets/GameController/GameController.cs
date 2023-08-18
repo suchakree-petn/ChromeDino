@@ -11,46 +11,63 @@ enum GameState
 }
 public class GameController : MonoBehaviour
 {
+    // Singleton instance
+    public static GameController Instance;
+
     //Current game state
-    GameState state;
+    [SerializeField] private GameState state;
 
-    // List of obstacle
-    [SerializeField] private List<Obstacle> obstacleList;
+    // In game timer
+    public float playingTime;
 
+    public delegate void Game();
+    public static Game OnStart;
+    public static Game InGame;
+    public static Game GameEnding;
     private void Awake()
     {
+        Instance = this;
+
         // Initial game state
         state = GameState.Start;
     }
 
-    private void Start()
+    private void FixedUpdate()
     {
-        InstantiateObstacle(obstacleList[0]);
-    }
-
-    // Get a group of obstacle
-    public GameObject InstantiateObstacle(Obstacle obstacle)
-    {
-        // Get random obstacle amount per group
-        int amount = Random.Range(1, obstacle.stackAmount);
-        amount = 3;
-        Debug.Log("amount: " + obstacle.stackAmount);
-
-        //Declare obstacle's parent
-        GameObject obstacleParent = new GameObject();
-        obstacleParent.name = "Obstacle";
-
-        float childPadding = 0;
-
-        // Instantiate obstacle in parent
-        for (int i = 0; i < amount; i++)
+        // State Process
+        switch (state)
         {
-            GameObject obstacleChild = Instantiate(obstacle.obstaclePrefab, obstacleParent.transform);
-            float scale = Random.Range(0.25f, 1);
-            obstacleChild.transform.localScale = new Vector3(scale, scale, scale);
-            childPadding += scale * 0.36f;
-            obstacleChild.transform.position = new Vector3(childPadding, 0f, 0f);
+            case GameState.Start:
+                OnStart?.Invoke();
+                state = GameState.InGame;
+                break;
+            case GameState.InGame:
+                InGame?.Invoke();
+                break;
+            case GameState.GameEnding:
+                GameEnding?.Invoke();
+                break;
         }
-        return obstacleParent;
     }
+
+    private void OnEnable()
+    {
+        OnStart += ResetTimer;
+        InGame += CountingTime;
+    }
+    private void OnDisable()
+    {
+        OnStart -= ResetTimer;
+        InGame -= CountingTime;
+    }
+    void ResetTimer()
+    {
+        playingTime = 0;
+    }
+    void CountingTime()
+    {
+        playingTime += Time.deltaTime;
+    }
+
+
 }
