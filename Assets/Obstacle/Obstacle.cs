@@ -9,6 +9,7 @@ public class Obstacle : ScriptableObject
     public string Name;
     public float damage;
     public int stackAmount;
+    public Vector2 groundOffset;
 }
 
 
