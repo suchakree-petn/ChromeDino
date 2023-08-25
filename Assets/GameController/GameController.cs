@@ -3,19 +3,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-enum GameState
+public enum GameState
 {
+    Prepare,
     Start,
     InGame,
     GameEnding
 }
+
 public class GameController : MonoBehaviour
 {
     // Singleton instance
     public static GameController Instance;
 
     //Current game state
-    [SerializeField] private GameState state;
+    [SerializeField] public GameState state;
 
     // In game timer
     public float playingTime;
@@ -32,7 +34,7 @@ public class GameController : MonoBehaviour
         state = GameState.Start;
     }
 
-    private void FixedUpdate()
+    public void FixedUpdate()
     {
         // State Process
         switch (state)
