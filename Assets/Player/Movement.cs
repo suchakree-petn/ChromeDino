@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class Movement : MonoBehaviour
 {
-    [SerializeField] private Rigidbody2D rb;
+    public static Movement instance;
+
+    private void Awake()
+    {
+        instance = this;
+    }
+
+    public Rigidbody2D rb;
     public Collider2D _collider;
-    [SerializeField] private float jumeForce = 30f;
+    [HideInInspector]public float jumeForce = 30;
     private float changecol = 0.185f;
     private float currentPosition, startPosition, originColider;
-    private bool jump = false;
+    [HideInInspector]public bool jump = false;
     public bool slide = false;
     void Start()
     {
@@ -20,13 +27,13 @@ public class Movement : MonoBehaviour
 
     void Update()
     {
-        currentPosition = rb.position.y;
+        currentPosition = rb.position.y;/*
         if (Input.GetKeyDown(KeyCode.Space) && jump == false && slide == false)
         {
             jump = true;
             rb.constraints = RigidbodyConstraints2D.None;
-            rb.AddForce(transform.up * jumeForce, ForceMode2D.Impulse);
-        }
+            rb.AddForce(transform.up * jumeForce*Time.deltaTime, ForceMode2D.Impulse);
+        }*/
         if (currentPosition < startPosition)
         {
             rb.velocity = Vector2.zero;
